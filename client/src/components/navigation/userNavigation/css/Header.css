@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Poppins:wght@300;400;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Montserrat", sans-serif;
+}
+
+:root {
+  --primary: #4bbb6b;
+  --secondary: #9dc08b;
+  --ternary: #00bcd4;
+  --white: #fff;
+  --dark: #000;
+  --gray: #999;
+}
+
+/*********************************HEADER SECTION***********************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+
+/* Header Css */
+
+#Header .navbar {
+  box-shadow: 0px 0px 2px 2px var(--gray);
+}
+
+#Header .container-fluid {
+  background-color: var(--primary);
+  padding: 15px;
+  overflow-x: hidden;
+}
+
+#Header .mainContainer .icon,
+.spanText {
+  padding: 5px;
+  color: var(--white);
+  font-size: 13px;
+}
+
+#Header .navbar-nav .nav-link {
+  color: var(--dark);
+  font-size: 14px;
+  padding-right: 20px;
+  font-weight: normal;
+}
+
+#Header .navbar-nav .nav-link:hover {
+  color: var(--primary);
+  transition: all 0.5s ease-in-out;
+}
+
+#Header .navbar-nav .nav-link::after {
+  content: " ";
+  display: block;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary);
+}
+
+#Header .navbar-nav .nav-link:hover::after {
+  transition: all 0.5s ease-in-out;
+  width: 100%;
+}
+
+/* Header Css */

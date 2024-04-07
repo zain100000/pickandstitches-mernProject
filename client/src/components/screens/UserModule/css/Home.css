@@ -1,0 +1,189 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Poppins:wght@300;400;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Montserrat", sans-serif;
+}
+
+:root {
+  --primary: #4bbb6b;
+  --secondary: #9dc08b;
+  --ternary: #00bcd4;
+  --white: #fff;
+  --dark: #000;
+  --gray: #999;
+}
+
+/*********************************HOME SECTION*************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+
+/* Home Css */
+
+/*********************************TAILOR ONLINE SECTION****************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+
+/* Tailor Online Css */
+#Tailor {
+  margin-top: 100px;
+  line-height: 25px;
+  overflow-x: hidden;
+}
+
+#Tailor .tailorImg {
+  text-align: right;
+}
+
+#Tailor .tailorHeading {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+#Tailor .tailorDescription {
+  font-size: 14px;
+  text-align: justify;
+  font-weight: 500;
+}
+
+#Tailor .tailorBtn {
+  padding: 10px 50px;
+  border-radius: 10px;
+  background-color: var(--primary);
+  color: var(--white);
+  font-size: small;
+  box-shadow: 0px 0px 2px 2px var(--secondary);
+  margin: 0px 8px;
+}
+
+#Tailor .tailorBtn:hover {
+  transition: all 0.3s ease-in-out;
+  color: var(--white);
+  background-color: var(--secondary);
+}
+
+@media (max-width: 1280px) {
+  #Tailor {
+    overflow-x: hidden;
+  }
+
+  #Tailor .tailorBtn {
+    width: 100%;
+    margin: 10px 5px;
+  }
+}
+
+@media (max-width: 1024px) {
+  #Tailor {
+    overflow-x: hidden;
+  }
+
+  #Tailor .tailorBtn {
+    width: 100%;
+    margin: 10px 5px;
+  }
+}
+
+@media (max-width: 991px) {
+  #Tailor {
+    overflow-x: hidden;
+  }
+
+  #Tailor .tailorBtn {
+    width: 100%;
+    margin: 8px 0px;
+  }
+}
+
+@media (max-width: 768px) {
+  #Tailor {
+    overflow-x: hidden;
+  }
+
+  #Tailor .tailorBtn {
+    width: 100%;
+    margin: 8px 0px;
+  }
+}
+
+@media (max-width: 576px) {
+  #Tailor {
+    overflow-x: hidden;
+  }
+
+  #Tailor .tailorImg {
+    margin-top: 5px;
+  }
+
+  #Tailor .tailorBtn {
+    width: 100%;
+    margin: 8px 0px;
+  }
+}
+
+/* Tailor Online Css */
+
+/*********************************TAILOR ONLINE SECTION****************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+
+/* ------------------------------------------------------------------------------------------------- */
+
+/*********************************GENTS + LADIES PRODUCTS SECTION******************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+
+/* Gents+Ladies Products Css */
+
+#GLProducts {
+  margin-top: 100px;
+  margin-bottom: 20px;
+  overflow-x: hidden;
+}
+
+#GLProducts .glProductsBtn {
+  padding: 10px 35px;
+  border-radius: 10px;
+  background-color: var(--primary);
+  color: var(--white);
+  font-size: small;
+  box-shadow: 0px 0px 2px 2px var(--secondary);
+  margin: 0px 100px;
+}
+
+#GLProducts .glProductsBtn:hover {
+  transition: all 0.3s ease-in-out;
+  color: var(--white);
+  background-color: var(--secondary);
+}
+
+/* Gents+Ladies Products Css */
+
+/*********************************GENTS + LADIES PRODUCTS SECTION******************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+
+/* ---------------------------------------------------------------------------------------------------- */
+
+/* Home Css */

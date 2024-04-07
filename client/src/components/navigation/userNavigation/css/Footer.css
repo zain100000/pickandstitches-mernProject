@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Poppins:wght@300;400;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Montserrat", sans-serif;
+}
+
+:root {
+  --primary: #4bbb6b;
+  --secondary: #9dc08b;
+  --ternary: #00bcd4;
+  --white: #fff;
+  --dark: #000;
+  --gray: #999;
+}
+
+/*********************************FOOTER SECTION***********************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+
+/* Footer Css */
+
+#Footer {
+  margin-top: 50px;
+}
+
+#Footer .footerHeading {
+  font-size: 1.4rem;
+}
+
+#Footer .footerDescription {
+  font-size: 0.9rem;
+  font-weight: 400;
+  text-align: justify;
+}
+
+#Footer ul li {
+  padding: 5px 0px;
+  list-style: disc;
+}
+
+#Footer ul li a {
+  text-decoration: none;
+  color: var(--dark);
+}
+
+#Footer ul li a:hover {
+  transition: all 0.3s ease-in-out;
+  color: var(--primary);
+}
+
+/* Footer Css */

@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Poppins:wght@300;400;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Montserrat", sans-serif;
+}
+
+:root {
+  --primary: #4bbb6b;
+  --secondary: #9dc08b;
+  --ternary: #00bcd4;
+  --white: #fff;
+  --dark: #000;
+  --gray: #999;
+}
+
+/*********************************LADIES ORDERS INFO SECTION***********************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+
+/* Ladies Order Info Css */
+
+#LadiesOrdersInfo {
+  overflow-x: hidden;
+  margin-bottom: 90px;
+  width: 100%;
+}
+
+#LadiesOrdersInfo .container {
+  border: 2px solid black;
+  padding: 20px 20px;
+}
+
+#LadiesOrdersInfo td {
+  font-weight: 500;
+}
+
+/* Ladies Order Info Css */
