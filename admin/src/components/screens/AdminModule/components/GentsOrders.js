@@ -12,7 +12,8 @@ const GentsOrders = () => {
   const [loading, setLoading] = useState(false);
 
   const getApiData = async () => {
-    const url = "https://pickandstitches-deployment-server.onrender.com/api/gents";
+    const url =
+      "https://pickandstitches-deployment-server.onrender.com/api/gents";
 
     try {
       const response = await axios.get(url);
@@ -62,7 +63,9 @@ const GentsOrders = () => {
         // Set loading to true to show the loader
         setLoading(true);
 
-        await axios.delete(`https://pickandstitches-deployment-server.onrender.com/api/gents/${id}`);
+        await axios.delete(
+          `https://pickandstitches-deployment-server.onrender.com/api/gents/${id}`
+        );
 
         // Update the data in state after successful deletion
         setData((prevData) => prevData.filter((item) => item._id !== id));
@@ -87,7 +90,9 @@ const GentsOrders = () => {
         setLoading(true);
         await Promise.all(
           selectedItems.map(async (id) => {
-            await axios.delete(`https://pickandstitches-deployment-server.onrender.com/api/gents/${id}`);
+            await axios.delete(
+              `https://pickandstitches-deployment-server.onrender.com/api/gents/${id}`
+            );
           })
         );
 
