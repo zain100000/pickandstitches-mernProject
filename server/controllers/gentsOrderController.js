@@ -6,6 +6,8 @@ const imageUpload = require("../middleware/product-file-upload");
 const { v2: cloudinary } = require("cloudinary");
 
 exports.createGentsOrder = async (req, res, next) => {
+  console.log("Request body:", req.body); // Add this line to log the request body
+
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(
