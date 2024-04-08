@@ -160,8 +160,9 @@ exports.deleteGentsOrder = async (req, res, next) => {
       try {
         // Extract the public ID from the Cloudinary URL
         const publicId = gentsOrder.samples
-          .replace("https://res.cloudinary.com/dfyaqu9zq/image/upload/", "")
-          .split("/")[1]
+          .split("/")
+          .slice(-4)
+          .join("/")
           .split(".")[0];
 
         // Delete the sample file from Cloudinary
