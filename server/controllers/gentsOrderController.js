@@ -42,6 +42,10 @@ exports.createGentsOrder = async (req, res, next) => {
       sampleUrl = await fileUpload.cloudinaryGentsUpload(req.file);
     }
 
+    // Log the request body and the generated sample URL for debugging
+    console.log("Request body:", req.body);
+    console.log("Generated sample URL:", sampleUrl);
+
     const gentsOrder = new GentsOrder({
       image,
       product,
@@ -63,6 +67,7 @@ exports.createGentsOrder = async (req, res, next) => {
       availTime,
       date,
       time,
+      samples: sampleUrl, // Include the generated sample URL in the order
     });
 
     // Save the GentsOrder to the database
