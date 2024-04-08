@@ -67,7 +67,7 @@ cloudinary.config({
 const cloudinaryProductImageUpload = async (file) => {
   try {
     const result = await cloudinary.uploader.upload(file.path, {
-      folder: `uploads/images`,
+      folder: `pickandstitches/uploads/images`,
     });
     return result.secure_url; // Return the URL of the uploaded image
   } catch (error) {

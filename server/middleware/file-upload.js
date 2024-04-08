@@ -30,7 +30,7 @@ cloudinary.config({
 const cloudinaryGentsUpload = async (file) => {
   try {
     const result = await cloudinary.uploader.upload(file.path, {
-      folder: `samples/gents`, // Folder name on Cloudinary based on gents/ladies
+      folder: `pickandstitches/samples/gents`, // Folder name on Cloudinary based on gents/ladies
     });
     return result.secure_url; // Return the URL of the uploaded image
   } catch (error) {
@@ -42,7 +42,7 @@ const cloudinaryGentsUpload = async (file) => {
 const cloudinaryLadiesUpload = async (file) => {
   try {
     const result = await cloudinary.uploader.upload(file.path, {
-      folder: `samples/ladies`, // Folder name on Cloudinary based on gents/ladies
+      folder: `pickandstitches/samples/ladies`, // Folder name on Cloudinary based on gents/ladies
     });
     return result.secure_url; // Return the URL of the uploaded image
   } catch (error) {
