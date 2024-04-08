@@ -40,12 +40,6 @@ const cloudinaryGentsUpload = async (file) => {
   }
 };
 
-module.exports = {
-  upload,
-  cloudinaryGentsUpload,
-  cloudinaryLadiesUpload,
-};
-
 const cloudinaryLadiesUpload = async (file) => {
   try {
     const result = await cloudinary.uploader.upload(file.path, {
