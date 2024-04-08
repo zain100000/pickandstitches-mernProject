@@ -32,11 +32,18 @@ const cloudinaryGentsUpload = async (file) => {
     const result = await cloudinary.uploader.upload(file.path, {
       folder: `pickandstitches/samples/gents`, // Folder name on Cloudinary based on gents/ladies
     });
+    console.log("Cloudinary upload result:", result);
     return result.secure_url; // Return the URL of the uploaded image
   } catch (error) {
     console.error("Error uploading image to Cloudinary:", error);
     throw new HttpError("Error uploading image to Cloudinary", 500);
   }
+};
+
+module.exports = {
+  upload,
+  cloudinaryGentsUpload,
+  cloudinaryLadiesUpload,
 };
 
 const cloudinaryLadiesUpload = async (file) => {
