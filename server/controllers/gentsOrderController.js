@@ -2,18 +2,16 @@ const HttpError = require("../models/http-error");
 const { validationResult } = require("express-validator");
 const GentsOrder = require("../models/gentsOrderModel");
 const fileUpload = require("../middleware/file-upload");
-const imageUpload = require("../middleware/product-file-upload");
 const { v2: cloudinary } = require("cloudinary");
 
 exports.createGentsOrder = async (req, res, next) => {
-  console.log("Request body:", req.body); // Add this line to log the request body
-
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(
       new HttpError("Invalid inputs passed, please check your data.", 422)
     );
   }
+
   try {
     const {
       image,
@@ -38,7 +36,7 @@ exports.createGentsOrder = async (req, res, next) => {
       time,
     } = req.body;
 
-    // Check if req.file exists and upload sample image to Cloudinary if available
+    // Handle file upload and get the sample URL
     let sampleUrl;
     if (req.file) {
       sampleUrl = await fileUpload.cloudinaryGentsUpload(req.file);
@@ -63,13 +61,21 @@ exports.createGentsOrder = async (req, res, next) => {
       deliverycharges,
       total,
       availTime,
-      samples: sampleUrl, // Store Cloudinary URL if available
       date,
       time,
     });
 
+    // Save the GentsOrder to the database
     await gentsOrder.save();
-    res.status(201).json({ message: "Gents Order created successfully!" });
+
+    // Construct the samples URL in the same format as seen in the web app
+    const orderId = gentsOrder._id; // Assuming the _id field is used for order identification
+    const samplesUrl = `/api/gents/${orderId}/samples`;
+
+    // Send success response with samples URL
+    res
+      .status(201)
+      .json({ message: "Gents Order created successfully!", samplesUrl });
   } catch (error) {
     console.error("Error creating Gents Order:", error);
     const err = new HttpError("Failed To Create Gents Order!", 500);
