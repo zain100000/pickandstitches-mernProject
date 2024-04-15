@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import "../../css/Main.css";
+import "./css/LadiesOrderDetails.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import Loader from "../Loader/Loader";
 

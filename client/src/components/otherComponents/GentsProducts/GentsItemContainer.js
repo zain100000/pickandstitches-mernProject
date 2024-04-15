@@ -1,7 +1,7 @@
 // GentsItemsContainer.js
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../../css/Main.css";
+import "./css/GentsItemContainer.css";
 
 const GentsItemsContainer = ({ image, product, price, onwards }) => {
   const navigate = useNavigate();

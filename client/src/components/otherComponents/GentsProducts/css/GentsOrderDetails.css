@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Poppins:wght@300;400;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Montserrat", sans-serif;
+}
+
+:root {
+  --primary: #4bbb6b;
+  --secondary: #9dc08b;
+  --ternary: #00bcd4;
+  --white: #fff;
+  --dark: #000;
+  --gray: #999;
+}
+
+/*********************************GENTS ORDER DETAILS SECTION**********************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+
+/* Gents Order Details Css */
+#GentsOrderDetails {
+  margin-top: 100px;
+  overflow-x: hidden;
+}
+
+#GentsOrderDetails .container {
+  border: 1px solid black;
+}
+
+#GentsOrderDetails .inputField {
+  border: 1px solid green;
+  width: 100%;
+  padding: 8px 0px;
+}
+
+#GentsOrderDetails .sampleField {
+  border: 1px solid green;
+  width: 100%;
+  padding: 5px 0px;
+}
+
+#GentsOrderDetails .form-control {
+  border: 1px solid green;
+  border-radius: 0px;
+  padding: 8px 0px;
+  color: var(--gray);
+  font-weight: 400;
+}
+
+#GentsOrderDetails .gentsOrderBtn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: var(--primary);
+  color: var(--white);
+  font-size: medium;
+}
+
+#GentsOrderDetails .gentsOrderBtn:hover {
+  transition: all 0.3s ease-in-out;
+  color: var(--white);
+  background-color: var(--secondary);
+}
+
+/* Gents Order Details Css */

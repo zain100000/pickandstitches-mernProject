@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../../css/Main.css";
+import "./css/LadiesItemContainer.css";
 
 const LadiesItemsContainer = ({ image, product, price, onwards }) => {
   const navigate = useNavigate();

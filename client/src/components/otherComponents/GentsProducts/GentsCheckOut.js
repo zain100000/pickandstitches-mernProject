@@ -3,6 +3,7 @@ import axios from "axios";
 import ReactDOM from "react-dom";
 import { useLocation, useNavigate } from "react-router-dom";
 import Loader from "../Loader/Loader";
+import './css/GentsCheckOut.css'
 
 const GentsCheckOut = () => {
   const location = useLocation();

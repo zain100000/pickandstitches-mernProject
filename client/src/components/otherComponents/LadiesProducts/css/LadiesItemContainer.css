@@ -1,0 +1,117 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Poppins:wght@300;400;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Montserrat", sans-serif;
+}
+
+:root {
+  --primary: #4bbb6b;
+  --secondary: #9dc08b;
+  --ternary: #00bcd4;
+  --white: #fff;
+  --dark: #000;
+  --gray: #999;
+}
+
+/*********************************LADIES ITEM CONTAINER SECTION********************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+
+/* Ladies Item Container Css */
+
+#LadiesItemContainer {
+  margin-top: 50px;
+  overflow-x: hidden;
+}
+
+#LadiesItemContainer .ladiesContainer:hover {
+  transition: all 0.3s ease-in-out;
+  background-color: rgb(224, 215, 215);
+}
+
+#LadiesItemContainer .pImg {
+  width: 70%;
+  aspect-ratio: 2/3;
+  object-fit: contain; /* Adjust object-fit as needed */
+  padding: 25px 10px;
+}
+
+#LadiesItemContainer .pName,
+.pPrice,
+.pOnwards {
+  color: #c3497d;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+@media (max-width: 991px) {
+  #LadiesItemContainer {
+    overflow-x: hidden;
+  }
+
+  #LadiesItemContainer .pImg {
+    width: 50%;
+    aspect-ratio: 2/3;
+    object-fit: contain; /* Adjust object-fit as needed */
+  }
+
+  #LadiesItemContainer .pName,
+  .pPrice,
+  .pOnwards {
+    color: #c3497d;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
+
+@media (max-width: 768px) {
+  #LadiesItemContainer {
+    overflow-x: hidden;
+  }
+
+  #LadiesItemContainer .pImg {
+    width: 50%;
+    aspect-ratio: 2/3;
+    object-fit: contain; /* Adjust object-fit as needed */
+  }
+
+  #LadiesItemContainer .pName,
+  .pPrice,
+  .pOnwards {
+    color: #c3497d;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
+
+@media (max-width: 576px) {
+  #LadiesItemContainer {
+    overflow-x: hidden;
+  }
+
+  #LadiesItemContainer .pImg {
+    width: 50%;
+    aspect-ratio: 2/3;
+    object-fit: contain; /* Adjust object-fit as needed */
+  }
+
+  #LadiesItemContainer .pName,
+  .pPrice,
+  .pOnwards {
+    color: #c3497d;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
+
+/* Ladies Item Container Css */

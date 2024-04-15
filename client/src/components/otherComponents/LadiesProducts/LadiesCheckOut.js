@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../css/Main.css";
+import "./css/LadiesCheckOut.css";
 import axios from "axios";
 import ReactDOM from "react-dom";
 import { useLocation, useNavigate } from "react-router-dom";

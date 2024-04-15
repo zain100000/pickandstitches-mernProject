@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Poppins:wght@300;400;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Montserrat", sans-serif;
+}
+
+:root {
+  --primary: #4bbb6b;
+  --secondary: #9dc08b;
+  --ternary: #00bcd4;
+  --white: #fff;
+  --dark: #000;
+  --gray: #999;
+}
+
+/*********************************GENTS CHECKOUT SECTION***************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+
+/* Gents CheckOut Css */
+
+#GentsCheckOut {
+  margin-top: 100px;
+  overflow-x: hidden;
+}
+
+#GentsCheckOut .container {
+  border: 2px solid black;
+  padding: 20px 20px;
+}
+
+#GentsCheckOut td {
+  font-weight: 500;
+}
+
+#GentsCheckOut .gentsOrderBtn {
+  padding: 15px 20px;
+  border-radius: 10px;
+  background-color: var(--primary);
+  color: var(--white);
+  font-size: medium;
+  width: 50%;
+}
+
+#GentsCheckOut .gentsOrderBtn:hover {
+  transition: all 0.3s ease-in-out;
+  color: var(--white);
+  background-color: var(--secondary);
+}
+
+.alert-container {
+  position: fixed;
+  top: 5px;
+  z-index: 999999;
+}
+
+.alert-content {
+  background-color: var(--white);
+  box-shadow: 0px 0px 2px 5px var(--secondary);
+  color: var(--dark);
+  padding: 30px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  border: 1px solid var(--dark);
+  left: 400px;
+}
+
+.alertBtn {
+  padding: 5px 50px;
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.alertBtn:hover {
+  transition: all 0.3s ease-in-out;
+  background-color: var(--secondary);
+  color: var(--dark);
+}
+
+/* Gents CheckOut Css */
