@@ -92,51 +92,52 @@ const updateProduct = async (req, res, next) => {
   const { title, price, category } = req.body;
   console.log("Received Request Body:", req.body); // Log received request body
 
-  let product;
   try {
-    product = await Product.findById(productId);
-  } catch (err) {
-    const error = new HttpError("Failed To Update Product!", 500);
-    return next(error);
-  }
+    let product = await Product.findById(productId);
 
-  if (!product) {
-    return res
-      .status(404)
-      .json({ success: false, message: "Product not found." });
-  }
-
-  // Update product fields
-  product.title = title;
-  product.price = price;
-  product.category = category;
-
-  // Check if a new image is provided
-  if (req.file) {
-    console.log("Received File:", req.file); // Log received file
-    try {
-      // Upload new product image to Cloudinary
-      const productImgUrl =
-        await productfileUpload.cloudinaryProductImageUpload(req.file);
-
-      // Update the product image URL
-      product.image = productImgUrl;
-    } catch (error) {
-      console.error("Error updating product image:", error);
-      const err = new HttpError("Failed to update product image", 500);
-      return next(err);
+    if (!product) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Product not found." });
     }
-  }
 
-  try {
-    await product.save();
-    console.log(product); // Log product after update
-    res
-      .status(200)
-      .json({ success: true, message: "Product Updated Successfully." });
+    // Update product fields
+    product.title = title;
+    product.price = price;
+    product.category = category;
+
+    // Check if a new image is provided
+    if (req.file) {
+      console.log("Received File:", req.file); // Log received file
+      try {
+        // Upload new product image to Cloudinary
+        const productImgUrl =
+          await productfileUpload.cloudinaryProductImageUpload(req.file);
+
+        // Update the product image URL
+        product.image = productImgUrl;
+      } catch (error) {
+        console.error("Error updating product image:", error);
+        const err = new HttpError("Failed to update product image", 500);
+        return next(err);
+      }
+    }
+
+    // Save the updated product
+    try {
+      await product.save();
+      console.log(product); // Log product after update
+      res
+        .status(200)
+        .json({ success: true, message: "Product Updated Successfully." });
+    } catch (err) {
+      console.error("Error Updating Product:", err);
+      const error = new HttpError("Failed To Update Product!", 500);
+      return next(error);
+    }
   } catch (err) {
-    console.error("Error Updating Product:", err);
-    const error = new HttpError("Failed To Update Product!", 500);
+    console.error("Error finding product:", err);
+    const error = new HttpError("Failed To Find Product!", 500);
     return next(error);
   }
 };
