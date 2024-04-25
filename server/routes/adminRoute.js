@@ -1,10 +1,10 @@
 const express = require("express");
 const { check } = require("express-validator");
-
 const adminController = require("../controllers/adminController");
-
+const checkAuth = require("../middleware/auth");
 const router = express.Router();
 
+// Public routes
 router.post(
   "/signup",
   [
@@ -15,10 +15,14 @@ router.post(
 );
 router.post("/login", adminController.login);
 
-router.get("/", adminController.getAdmin);
+// Protected routes
+router.get("/getAdmin", checkAuth, adminController.getAdmin);
+router.patch("/reset-password", checkAuth, adminController.resetPassword);
+router.post("/logout", checkAuth, adminController.logout);
 
-router.patch("/reset-password", adminController.resetPassword);
-
-router.post("/logout", adminController.logout);
+// Unauthorized Access
+router.use((req, res) => {
+  res.status(401).json({ message: "Unauthorized Access. Please log in." });
+});
 
 module.exports = router;

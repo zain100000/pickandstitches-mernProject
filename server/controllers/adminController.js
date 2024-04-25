@@ -1,7 +1,9 @@
 const { validationResult } = require("express-validator");
 const HttpError = require("../models/http-error");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const Admin = require("../models/adminModel");
+const BlacklistedToken = require("../models/blacklisted-token-model");
 
 const getAdmin = async (req, res, next) => {
   let admin;
@@ -17,8 +19,7 @@ const getAdmin = async (req, res, next) => {
 const signup = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log(errors.array()); // Log validation errors
-    return next(new HttpError("Enter Invalid Inputs!", 422));
+    return res.status(422).json({ message: "Enter Valid Email and Password!" });
   }
 
   const { email, password } = req.body;
@@ -27,24 +28,20 @@ const signup = async (req, res, next) => {
   try {
     existingAdmin = await Admin.findOne({ email: email });
   } catch (err) {
-    const error = new HttpError("Failed To Signed Up!.", 500);
-    return next(error);
+    return res.status(500).json({ message: "Failed To Signed Up!" });
   }
 
   if (existingAdmin) {
-    const error = new HttpError(
-      "Admin Already Exists, Please Login Instead.",
-      422
-    );
-    return next(error);
+    return res
+      .status(422)
+      .json({ message: "Admin Already Exists, Please Login Instead." });
   }
 
   let hashedPassword;
   try {
     hashedPassword = await bcrypt.hash(password, 12);
   } catch (err) {
-    const error = new HttpError("Could Not Create Admin!", 500);
-    return next(error);
+    return res.status(500).json({ message: "Failed to hash password." });
   }
 
   const createdAdmin = new Admin({
@@ -54,15 +51,21 @@ const signup = async (req, res, next) => {
 
   try {
     await createdAdmin.save();
-  } catch (err) {
-    const error = new HttpError("Failed To Sign Up!", 500);
-    return next(error);
-  }
 
-  res.status(201).json({
-    adminId: createdAdmin.id,
-    email: createdAdmin.email,
-  });
+    // Generate token on successful signup
+    const token = jwt.sign(
+      { email: createdAdmin.email, adminId: createdAdmin._id },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    res.status(201).json({
+      message: "Signup Successfully!",
+      token: token, // Include token in response
+    });
+  } catch (err) {
+    return res.status(500).json({ message: "Failed To Sign Up!" });
+  }
 };
 
 const login = async (req, res, next) => {
@@ -91,27 +94,26 @@ const login = async (req, res, next) => {
   }
 
   if (!isValidPassword) {
-    const error = new HttpError("Could Not Logged In!", 500);
+    const error = new HttpError("Invalid Credentials", 401);
     return next(error);
   }
 
+  // Generate token without expiration
+  const token = existingAdmin.generateAuthToken();
+
   res.json({
-    adminId: existingAdmin.id,
-    email: existingAdmin.email,
+    message: "Login Successfull",
+    token: token,
   });
 };
 
 const resetPassword = async (req, res) => {
   const { email, password } = req.body;
   try {
-    // Find the admin by email
     const admin = await Admin.findOne({ email });
-
-    // Check if admin exists
     if (!admin) {
       return res.status(404).json({ message: "Admin not found" });
     }
-
     let hashedPassword;
     try {
       hashedPassword = await bcrypt.hash(password, 12);
@@ -119,12 +121,8 @@ const resetPassword = async (req, res) => {
       const error = new HttpError("Could Not Create Admin!", 500);
       return next(error);
     }
-
-    // Update admin's password
     admin.password = hashedPassword;
     await admin.save();
-
-    // Return success message
     res.status(200).json({ message: "Password reset successfully" });
   } catch (error) {
     console.error(error);
@@ -133,18 +131,21 @@ const resetPassword = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      console.error(err);
-      res.status(500).json({ message: "Failed to logout" });
-    } else {
-      res.status(200).json({ message: "Logged out successfully" });
-    }
-  });
+  const token = req.headers.authorization.split(" ")[1];
+  const blacklistedToken = new BlacklistedToken({ token });
+  try {
+    await blacklistedToken.save();
+    res.status(200).json({ message: "Logged out successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to logout" });
+  }
 };
 
-exports.getAdmin = getAdmin;
-exports.signup = signup;
-exports.login = login;
-exports.resetPassword = resetPassword;
-exports.logout = logout;
+module.exports = {
+  getAdmin,
+  signup,
+  login,
+  resetPassword,
+  logout,
+};
