@@ -102,7 +102,7 @@ const updateProduct = async (req, res, next) => {
 
     if (
       req.headers["content-type"] &&
-      req.headers["content-type"].includes("multipart/form-data")
+      req.headers["content-type"].includes("application/json")
     ) {
       if (req.body.title) product.title = req.body.title;
       if (req.body.price) product.price = req.body.price;
@@ -110,7 +110,7 @@ const updateProduct = async (req, res, next) => {
 
       if (req.file) {
         if (product.image) {
-          const publicId = property.image
+          const publicId = product.image
             .split("/")
             .slice(-4)
             .join("/")
