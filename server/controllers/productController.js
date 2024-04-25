@@ -136,6 +136,7 @@ const updateProduct = async (req, res, next) => {
     res
       .status(200)
       .json({ success: true, message: "Product Updated Successfully." });
+    console.table(product);
   } catch (err) {
     console.error("Error updating Product:", err);
     const error = new HttpError("Failed To Update Product!", 500);
