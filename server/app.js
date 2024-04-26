@@ -1,4 +1,3 @@
-const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -6,8 +5,8 @@ const cors = require("cors");
 
 const gentsOrderRoutes = require("./routes/gentsOrderRoute");
 const ladiesOrderRoutes = require("./routes/ladiesOrderRoute");
-const adminRoute = require("./routes/adminRoute");
-const feedbackRoute = require("./routes/feedbackRoute");
+const feedbackRoutes = require("./routes/feedbackRoute");
+const adminRoutes = require("./routes/adminRoute");
 const productRoutes = require("./routes/productRoute");
 require("dotenv").config();
 
@@ -27,12 +26,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use("/api/admin", adminRoutes);
 app.use("/api/gents", gentsOrderRoutes);
 app.use("/api/ladies", ladiesOrderRoutes);
-
-app.use("/api/admin", adminRoute);
-app.use("/api/feedback", feedbackRoute);
-
+app.use("/api/feedback", feedbackRoutes);
 app.use("/api/products", productRoutes);
 
 mongoose
