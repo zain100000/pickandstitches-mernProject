@@ -10,6 +10,7 @@ import LadiesOrders from "./components/screens/Ladies/LadiesOrders";
 import LadiesOrderInfo from "./components/screens/Ladies/LadiesOrderInfo";
 import AddProducts from "./components/screens/Products/AddProducts";
 import ProductsList from "./components/screens/Products/ProductsList";
+import ProductInfoUpdate from "./components/screens/Products/ProductInfoUpdate";
 import Feedback from "./components/screens/FeedBack/Feedback";
 
 const App = () => {
@@ -26,6 +27,10 @@ const App = () => {
           <Route path="ladies-order-info/:id" element={<LadiesOrderInfo />} />
           <Route path="add-products" element={<AddProducts />} />
           <Route path="products-list" element={<ProductsList />} />
+          <Route
+            path="product-info-update/:id"
+            element={<ProductInfoUpdate />}
+          />
           <Route path="feedbacks" element={<Feedback />} />
         </Route>
       </Route>

@@ -29,11 +29,11 @@
 
 /* Gents Orders Css */
 
-#GentsOrders {
-  height: 100vh;
+#GentsOrders {  
   margin: 20px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-  overflow-y: scroll;
+  overflow-y: auto;
+  max-height: calc(100vh - 150px);
 }
 
 #GentsOrders .input-group {

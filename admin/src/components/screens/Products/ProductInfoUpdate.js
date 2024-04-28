@@ -1,59 +1,26 @@
 import React, { useState } from "react";
-import "../css/Products/AddProducts.css";
+import "../css/Products/ProductInfoUpdate.css";
+import { useLocation } from "react-router-dom";
 import Loader from "../../otherComponents/Loader/Loader";
-import axios from "axios";
 
-const AddProducts = () => {
-  const [title, setTitle] = useState("");
-  const [price, setPrice] = useState("");
-  const [category, setCategory] = useState("");
-  const [image, setImage] = useState("");
+const ProductInfoUpdate = () => {
+  const location = useLocation();
+  const { item } = location.state;
+  const [selectedImage, setSelectedImage] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // Function to handle image selection
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    setImage(file);
-  };
-
-  const handleAddProduct = async () => {
-    try {
-      setLoading(true);
-
-      const formData = new FormData();
-      formData.append("title", title);
-      formData.append("price", price);
-      formData.append("category", category);
-      formData.append("image", image);
-
-      const addProductResponse = await axios.post(
-        "https://pickandstitches-deployment-server.onrender.com/api/products/addProduct",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
-      if (addProductResponse.data.success) {
-        alert("Product Added!");
-      } else {
-        alert("Error Occurred During Product Addition");
-      }
-    } catch (error) {
-      console.error("Error adding product:", error);
-      alert("Error occurred. Please try again.");
-    } finally {
-      setLoading(false);
-    }
+    setSelectedImage(file);
   };
 
   return (
-    <section id="AddProducts">
+    <section id="ProductInfoUpdate">
       <div className="container">
         <div className="row p-2">
           <div className="col-sm-12 col-md-12 col-lg-12">
-            <h4 className="text-center">Add Products</h4>
+            <h4 className="text-center">Update Product</h4>
           </div>
         </div>
         <form>
@@ -67,8 +34,7 @@ const AddProducts = () => {
                   <input
                     className="form-control"
                     placeholder="Title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    value={item.title}
                   />
                 </div>
               </div>
@@ -81,8 +47,7 @@ const AddProducts = () => {
                   <input
                     className="form-control"
                     placeholder="Price"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
+                    value={`${item.price}`}
                   />
                 </div>
               </div>
@@ -95,8 +60,7 @@ const AddProducts = () => {
                   <select
                     className="form-select"
                     style={{ border: "2px solid #000", cursor: "pointer" }}
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
+                    value={item.category}
                   >
                     <option value="">Select category</option>
                     <option value="Gents">Gents</option>
@@ -125,13 +89,28 @@ const AddProducts = () => {
 
             <div className="col-sm-12 col-md-6 col-lg-6">
               <div className="image-preview-container">
-                {image ? (
+                {selectedImage ? (
                   <div>
                     <img
-                      src={URL.createObjectURL(image)}
+                      src={URL.createObjectURL(selectedImage)} // Display selected image
+                      alt="Selected"
                       style={{
                         aspectRatio: "3/2",
-                        width: "80%",
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "contain",
+                        marginTop: "5px",
+                      }}
+                    />
+                  </div>
+                ) : item.image ? (
+                  <div>
+                    <img
+                      src={item.image}
+                      alt="Previous"
+                      style={{
+                        aspectRatio: "3/2",
+                        width: "100%",
                         height: "100%",
                         objectFit: "contain",
                         marginTop: "5px",
@@ -159,9 +138,7 @@ const AddProducts = () => {
               {loading ? (
                 <Loader />
               ) : (
-                <button className="add-products-btn" onClick={handleAddProduct}>
-                  Add Product
-                </button>
+                <button className="add-products-btn">Update Product</button>
               )}
             </div>
           </div>
@@ -171,4 +148,4 @@ const AddProducts = () => {
   );
 };
 
-export default AddProducts;
+export default ProductInfoUpdate;

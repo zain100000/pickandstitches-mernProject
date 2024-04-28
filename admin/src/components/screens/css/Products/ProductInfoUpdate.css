@@ -20,29 +20,26 @@
   --gray: #999;
 }
 
-/*********************************FEEDBACK SECTION*********************************/
+/*********************************PRODUCT INFO UPDATE SECTION**********************/
 /**********************************************************************************/
 /**********************************************************************************/
 /**********************************************************************************/
 /**********************************************************************************/
 /**********************************************************************************/
 
-/* Feedback Css */
+/* Product Info Update Css */
 
-#FeedBack {
-  height: 100vh;
+#ProductInfoUpdate {
   margin: 20px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
-  max-height: calc(100vh - 150px);
 }
 
-#FeedBack .input-group {
-  width: 50%;
-  margin: 20px;
+#ProductInfoUpdate .input-group {
+  width: 80%;
+  margin: 15px;
 }
 
-#FeedBack input,
+#ProductInfoUpdate input,
 .input-group-text {
   background-color: var(--dark);
   border: none;
@@ -50,29 +47,39 @@
   padding: 10px;
 }
 
-#FeedBack .fa-search {
+#ProductInfoUpdate .fa-signature,
+.fa-tag,
+.fa-user-friends,
+.fa-upload,
+.fa-plus {
   color: var(--ternary);
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 
-#FeedBack input {
+#ProductInfoUpdate input {
   color: var(--white);
   font-size: 0.9rem;
 }
 
-#FeedBack .form-control:focus {
+#ProductInfoUpdate .form-control:focus {
   box-shadow: none;
   border-color: #ced4da;
 }
 
-#FeedBack .list-container {
-  margin: 5px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+#ProductInfoUpdate .add-products-btn {
+  background-color: var(--dark);
+  border: none;
+  padding: 10px;
+  width: 20%;
+  margin-left: 16px;
+  margin-bottom: 20px;
+  color: var(--white);
 }
 
-#FeedBack .list-container .title {
+#ProductInfoUpdate .add-products-btn:hover {
   background-color: var(--ternary);
-  padding: 5px;
+  color: var(--dark);
+  transition: 0.5s ease-in-out;
 }
 
-/* Feedback Css */
+/* Product Info Update Css */
