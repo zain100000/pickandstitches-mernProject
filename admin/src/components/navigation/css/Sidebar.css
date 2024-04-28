@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&family=Poppins:wght@300;400;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Roboto", sans-serif;
+}
+
+:root {
+  --primary: #4bbb6b;
+  --secondary: #9dc08b;
+  --ternary: #00bcd4;
+  --white: #fff;
+  --dark: #000;
+  --gray: #999;
+}
+
+/*********************************SIDEBAR SECTION**********************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+
+/* Sidebar Css */
+
+#Sidebar {
+  display: flex;
+  flex-direction: column;
+  padding-top: 30px;
+  gap: 5px;
+  width: 100%;
+  max-width: 250px;
+  height: 79.5vh;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+#Sidebar .sidebar-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 8px 20px;
+  padding: 0px 10px;
+  border-radius: 6px;
+  gap: 5px;
+  cursor: pointer;
+  background-color: var(--dark);
+}
+
+#Sidebar .sidebar-item .icon {
+  aspect-ratio: 3/2;
+  width: 50px;
+  object-fit: contain;
+}
+
+#Sidebar .sidebar-item p {
+  margin-top: 20px;
+  color: var(--white);
+}
+
+#Sidebar p.active {
+  color: var(--dark);
+}
+
+/* Sidebar Css */

@@ -1,17 +1,14 @@
 const express = require("express");
-const { check } = require("express-validator");
+const router = express.Router();
+const authMiddleware = require("../middleware/auth/authMiddleware");
 const adminController = require("../controllers/adminController");
 
-const router = express.Router();
+router.post("/signup", adminController.signup);
 
-// Public routes
-router.post(
-  "/signup",
-  [
-    check("email").normalizeEmail().isEmail(),
-    check("password").isLength({ min: 6 }),
-  ],
-  adminController.signup
-);
+router.post("/login", adminController.login);
+
+router.get("/getAdmin", authMiddleware, adminController.getAdmin);
+
+router.get("/getAdmin", authMiddleware, adminController.getAdminById);
 
 module.exports = router;

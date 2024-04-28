@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&family=Poppins:wght@300;400;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Roboto", sans-serif;
+}
+
+:root {
+  --primary: #4bbb6b;
+  --secondary: #9dc08b;
+  --ternary: #00bcd4;
+  --white: #fff;
+  --dark: #000;
+  --gray: #999;
+}
+
+/*********************************LOGIN SECTION*************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+
+/* Login Css */
+
+#Login {
+  overflow-x: hidden;
+}
+
+#Login .logo {
+  aspect-ratio: 3/2;
+  width: 300px;
+  object-fit: contain;
+  margin-top: 80px;
+}
+
+#Login form {
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+#Login .form-control {
+  border: 2px solid var(--gray);
+  padding: 10px;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+}
+
+#Login .form-control:focus {
+  border: 2px solid var(--primary);
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  box-shadow: none;
+}
+
+#Login .login-btn {
+  padding: 10px 80px;
+  background-color: var(--ternary);
+  color: var(--white);
+  font-weight: 500;
+  text-align: center;
+}
+
+#Login .login-btn:hover {
+  transition: all 0.5s ease-in-out;
+  background-color: var(--primary);
+}
+
+#Login .signup-btn {
+  padding: 10px 30px;
+  background-color: var(--ternary);
+  color: var(--white);
+  font-weight: 500;
+  text-align: center;
+}
+
+#Login .signup-btn:hover {
+  transition: all 0.5s ease-in-out;
+  background-color: var(--primary);
+}
+
+#Login .modal-btn {
+  padding: 10px;
+  margin-top: 30px;
+  border-radius: 10px;
+  background-color: var(--dark);
+  color: var(--white);
+  font-weight: 500;
+  text-align: center;
+}
+
+#Login .modal-btn:hover {
+  transition: all 0.5s ease-in-out;
+  background-color: var(--primary);
+}
+
+/* Login Css */

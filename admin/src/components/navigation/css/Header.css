@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&family=Poppins:wght@300;400;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Roboto", sans-serif;
+}
+
+:root {
+  --primary: #4bbb6b;
+  --secondary: #9dc08b;
+  --ternary: #00bcd4;
+  --white: #fff;
+  --dark: #000;
+  --gray: #999;
+}
+
+/*********************************HEADER SECTION***********************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+
+/* Header Css */
+#Header {
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+#Header .logo {
+  aspect-ratio: 3/2;
+  width: 200px;
+  object-fit: contain;
+}
+
+#Header .btn {
+  background-color: var(--ternary);
+  color: var(--white);
+  width: 60px;
+  height: 60px;
+  border-radius: 50px;
+  margin-top: 35px;
+}
+
+#Header .btn:hover {
+  transition: all 0.5s ease-in-out;
+  background-color: var(--primary);
+}
+
+/* Header Css */
