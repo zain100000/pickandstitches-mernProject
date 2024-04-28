@@ -3,7 +3,7 @@ const { validationResult } = require("express-validator");
 const HttpError = require("../models/http-error");
 const FeedBack = require("../models/feedbackModel");
 
-exports.createFeedBack = async (req, res) => {
+exports.createFeedBack = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(
@@ -29,7 +29,7 @@ exports.createFeedBack = async (req, res) => {
   }
 };
 
-exports.getFeedBackById = async (req, res) => {
+exports.getFeedBackById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const feedback = await FeedBack.findById(id);
@@ -47,7 +47,7 @@ exports.getFeedBackById = async (req, res) => {
   }
 };
 
-exports.getFeedBack = async (req, res) => {
+exports.getFeedBack = async (req, res, next) => {
   try {
     const feedback = await FeedBack.find();
 

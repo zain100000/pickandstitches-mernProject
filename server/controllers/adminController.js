@@ -86,7 +86,7 @@ const login = async (req, res, next) => {
 };
 
 // Get admin profile
-const getAdmin = async (req, res) => {
+const getAdmin = async (req, res, next) => {
   try {
     const admin = await Admin.findById(req.admin.id).select("-password");
     const error = new HttpError("Admin Retrieve Successfully!");

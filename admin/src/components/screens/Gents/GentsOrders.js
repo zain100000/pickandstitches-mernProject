@@ -183,17 +183,18 @@ const GentsOrders = () => {
                             <td>
                               <input
                                 type="checkbox"
+                                className="mt-5"
                                 checked={selectedItems.includes(item._id)}
                                 onChange={() =>
                                   handleIndividualCheckbox(item._id)
                                 }
                               />
                             </td>
-                            <td>{item.name}</td>
-                            <td>{item.mobile}</td>
-                            <td>{item.address}</td>
-                            <td>{item.product}</td>
-                            <td>
+                            <td className="py-5">{item.name}</td>
+                            <td className="py-5">{item.mobile}</td>
+                            <td className="py-5">{item.address}</td>
+                            <td className="py-5">{item.product}</td>
+                            <td className="py-4">
                               {item.date}
                               <br />
                               {item.time}
@@ -204,24 +205,44 @@ const GentsOrders = () => {
                                 style={{
                                   display: "flex",
                                   justifyContent: "space-around",
+                                  gap: 20,
                                   alignItems: "center",
-                                  marginTop: "15px",
+                                  marginTop: "40px",
                                 }}
                               >
-                                <div className="eye-icon">
-                                  <Link
-                                    to={`/admin/gents-order-info/${item._id}`}
-                                  >
-                                    <i className="fas fa-eye"></i>
-                                  </Link>
+                                <div
+                                  className="eye-icon"
+                                  style={{
+                                    padding: "2px 10px",
+                                    borderRadius: "50px",
+                                    boxShadow:
+                                      "0px 4px 20px rgba(0, 0, 0, 0.1)",
+                                  }}
+                                >
+                                  <div className="eye-icon">
+                                    <Link
+                                      to={`/admin/gents-order-info/${item._id}`}
+                                      state={{ item }}
+                                    >
+                                      <i className="fas fa-eye pt-2"></i>
+                                    </Link>
+                                  </div>
                                 </div>
-                                <div className="trash-icon">
+                                <div
+                                  className="trash-icon"
+                                  style={{
+                                    padding: "2px 12px",
+                                    borderRadius: "50px",
+                                    boxShadow:
+                                      "0px 4px 20px rgba(0, 0, 0, 0.1)",
+                                  }}
+                                >
                                   <Link
                                     onClick={() =>
                                       handleIndividualDelete(item._id)
                                     }
                                   >
-                                    <i className="fas fa-trash text-danger"></i>
+                                    <i className="fas fa-trash text-danger pt-2"></i>
                                   </Link>
                                 </div>
                               </div>
