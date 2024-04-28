@@ -95,7 +95,8 @@ const Login = ({ onClose }) => {
         password,
       };
 
-      const SigninApiUrl = "http://localhost:5000/api/admin/login";
+      const SigninApiUrl =
+        "https://pickandstitches-deployment-server.onrender.com/api/admin/login";
       const response = await axios.post(SigninApiUrl, signinFormData, {
         headers: {
           "Content-Type": "application/json",

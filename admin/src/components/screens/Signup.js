@@ -94,7 +94,8 @@ const Signup = ({ onClose }) => {
         password,
       };
 
-      const SignupApiUrl = "http://localhost:5000/api/admin/signup";
+      const SignupApiUrl =
+        "https://pickandstitches-deployment-server.onrender.com/api/admin/signup";
       const response = await axios.post(SignupApiUrl, signupFormData, {
         headers: {
           "Content-Type": "application/json",
