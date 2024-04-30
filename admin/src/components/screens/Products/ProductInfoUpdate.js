@@ -2,17 +2,61 @@ import React, { useState } from "react";
 import "../css/Products/ProductInfoUpdate.css";
 import { useLocation } from "react-router-dom";
 import Loader from "../../otherComponents/Loader/Loader";
+import axios from "axios";
 
 const ProductInfoUpdate = () => {
   const location = useLocation();
   const { item } = location.state;
   const [selectedImage, setSelectedImage] = useState("");
+  const [productData, setProductData] = useState({
+    title: item.title,
+    price: item.price,
+    category: item.category,
+  });
   const [loading, setLoading] = useState(false);
 
   // Function to handle image selection
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setSelectedImage(file);
+  };
+
+  // Function to handle changes in input fields
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setProductData({ ...productData, [name]: value });
+  };
+
+  // Function to handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("image", selectedImage);
+    setLoading(true);
+
+    try {
+      const updatedProduct = {
+        title: productData.title,
+        price: productData.price,
+        category: productData.category,
+      };
+
+      await axios.patch(
+        `https://pickandstitches-deployment-server.onrender.com/api/products/updateProduct/${item._id}`,
+        updatedProduct,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      alert("Product updated successfully!");
+      setLoading(false);
+    } catch (error) {
+      console.error("Error updating product:", error);
+      setLoading(false);
+    }
   };
 
   return (
@@ -23,7 +67,7 @@ const ProductInfoUpdate = () => {
             <h4 className="text-center">Update Product</h4>
           </div>
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-sm-12 col-md-6 col-lg-6">
               <div className="title-container">
@@ -34,7 +78,9 @@ const ProductInfoUpdate = () => {
                   <input
                     className="form-control"
                     placeholder="Title"
-                    value={item.title}
+                    name="title"
+                    value={productData.title}
+                    onChange={handleInputChange}
                   />
                 </div>
               </div>
@@ -47,7 +93,9 @@ const ProductInfoUpdate = () => {
                   <input
                     className="form-control"
                     placeholder="Price"
-                    value={`${item.price}`}
+                    name="price"
+                    value={productData.price}
+                    onChange={handleInputChange}
                   />
                 </div>
               </div>
@@ -60,7 +108,9 @@ const ProductInfoUpdate = () => {
                   <select
                     className="form-select"
                     style={{ border: "2px solid #000", cursor: "pointer" }}
-                    value={item.category}
+                    name="category"
+                    value={productData.category}
+                    onChange={handleInputChange}
                   >
                     <option value="">Select category</option>
                     <option value="Gents">Gents</option>
