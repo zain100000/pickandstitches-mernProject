@@ -5,24 +5,15 @@ const { v2: cloudinary } = require("cloudinary");
 
 const addProduct = async (req, res, next) => {
   try {
-    let products = await Product.find({});
-    let id;
-    if (products.length > 0) {
-      let last_product_array = products.slice(-1);
-      let last_product = last_product_array[0];
-      id = last_product.id + 1;
-    } else {
-      id = 1;
-    }
+    const products = await Product.find({});
+    const id = products.length > 0 ? products.slice(-1)[0].id + 1 : 1;
 
     const { title, price, category } = req.body;
 
-    // Check if req.file exists before passing it to the cloudinaryProductImageUpload function
     if (!req.file) {
-      throw new HttpError("No image file provided!", 400);
+      return next(new HttpError("No image file provided!", 400));
     }
 
-    // Upload product image to Cloudinary
     const productImgUrl = await productfileUpload.cloudinaryProductImageUpload(
       req.file
     );
@@ -36,28 +27,25 @@ const addProduct = async (req, res, next) => {
     });
 
     await product.save();
-    res
-      .status(201)
-      .json({ success: true, message: "Product Added successfully!" });
+    res.status(201).json({ message: "Product Added successfully!" });
   } catch (error) {
     console.error("Error Adding Product:", error);
-    const err = new HttpError("Failed To Add Product!", 500);
-    return next(err);
+    return next(new HttpError("Failed To Add Product!", 500));
   }
 };
 
 const getProduct = async (req, res, next) => {
   try {
-    const product = await Product.find();
+    const products = await Product.find();
 
-    if (!product) {
+    if (!products || products.length === 0) {
       return res.status(404).json({ message: "No Products!" });
     }
 
-    res.status(200).json({ Product: product });
-  } catch {
-    const error = new HttpError("Failed To Get Product!", 500);
-    return next(error);
+    res.status(200).json({ products });
+  } catch (error) {
+    console.error("Error fetching Products:", error);
+    return next(new HttpError("Failed To Get Products!", 500));
   }
 };
 
@@ -72,10 +60,10 @@ const getProductById = async (req, res, next) => {
         .json({ message: "Product not found for Provided Id" });
     }
 
-    res.status(200).json({ Product: product });
-  } catch {
-    const error = new HttpError("Product Not Found By Provided Id!.", 500);
-    return next(error);
+    res.status(200).json({ product });
+  } catch (error) {
+    console.error("Error fetching Product by ID:", error);
+    return next(new HttpError("Product Not Found By Provided Id!", 500));
   }
 };
 
@@ -83,9 +71,7 @@ const updateProduct = async (req, res, next) => {
   const productId = req.params.id;
 
   if (!productId) {
-    return res
-      .status(400)
-      .json({ success: false, message: "Invalid Product ID" });
+    return res.status(400).json({ message: "Invalid Product ID" });
   }
 
   console.log("Received Product ID:", productId);
@@ -95,9 +81,7 @@ const updateProduct = async (req, res, next) => {
     let product = await Product.findById(productId);
 
     if (!product) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Product not found." });
+      return res.status(404).json({ message: "Product not found." });
     }
 
     if (
@@ -128,19 +112,16 @@ const updateProduct = async (req, res, next) => {
         product.image = result.secure_url;
       }
     } else {
-      product = { ...product, ...req.body };
+      product = { ...product.toObject(), ...req.body };
     }
 
     await product.save();
 
-    res
-      .status(200)
-      .json({ success: true, message: "Product Updated Successfully." });
+    res.status(200).json({ message: "Product Updated Successfully." });
     console.log(product);
   } catch (err) {
     console.error("Error updating Product:", err);
-    const error = new HttpError("Failed To Update Product!", 500);
-    return next(error);
+    return next(new HttpError("Failed To Update Product!", 500));
   }
 };
 
@@ -154,7 +135,7 @@ const deleteProduct = async (req, res, next) => {
   try {
     const product = await Product.findById(productId);
 
-    if (!productId) {
+    if (!product) {
       return res.status(404).json({ message: "Product not found." });
     }
 
@@ -168,7 +149,6 @@ const deleteProduct = async (req, res, next) => {
 
         const deletionResult = await cloudinary.uploader.destroy(publicId);
         if (deletionResult.result === "ok") {
-          console.log(`Product Image deleted from Cloudinary: ${publicId}`);
         } else {
           console.error(
             `Failed to delete Product Image from Cloudinary: ${publicId}`
@@ -184,8 +164,7 @@ const deleteProduct = async (req, res, next) => {
     res.status(200).json({ message: "Product Deleted Successfully." });
   } catch (error) {
     console.log("Error deleting Product:", error);
-    const err = new HttpError("Failed To Delete Product!", 500);
-    return next(err);
+    return next(new HttpError("Failed To Delete Product!", 500));
   }
 };
 

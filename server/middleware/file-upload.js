@@ -3,7 +3,6 @@ const { v2: cloudinary } = require("cloudinary");
 const HttpError = require("../models/http-error");
 require("dotenv").config();
 
-// Multer configuration for file upload
 const storage = multer.diskStorage({});
 
 const fileFilter = (req, file, cb) => {
@@ -14,13 +13,11 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-// Multer upload configuration
 const upload = multer({
   storage: storage,
   fileFilter: fileFilter,
-}).single("samples"); // Using the same field name for both gents and ladies
+}).single("samples");
 
-// Cloudinary configuration
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -30,10 +27,9 @@ cloudinary.config({
 const cloudinaryGentsUpload = async (file) => {
   try {
     const result = await cloudinary.uploader.upload(file.path, {
-      folder: `pickandstitches/samples/gents`, // Folder name on Cloudinary based on gents/ladies
+      folder: `pickandstitches/samples/gents`,
     });
-    console.log("Cloudinary upload result:", result);
-    return result.secure_url; // Return the URL of the uploaded image
+    return result.secure_url;
   } catch (error) {
     console.error("Error uploading image to Cloudinary:", error);
     throw new HttpError("Error uploading image to Cloudinary", 500);
@@ -43,9 +39,9 @@ const cloudinaryGentsUpload = async (file) => {
 const cloudinaryLadiesUpload = async (file) => {
   try {
     const result = await cloudinary.uploader.upload(file.path, {
-      folder: `pickandstitches/samples/ladies`, // Folder name on Cloudinary based on gents/ladies
+      folder: `pickandstitches/samples/ladies`,
     });
-    return result.secure_url; // Return the URL of the uploaded image
+    return result.secure_url;
   } catch (error) {
     console.error("Error uploading image to Cloudinary:", error);
     throw new HttpError("Error uploading image to Cloudinary", 500);

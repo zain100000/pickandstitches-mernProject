@@ -3,7 +3,6 @@ const { check, validationResult } = require("express-validator");
 const router = express.Router();
 const feedBackController = require("../controllers/feedbackController");
 
-// Route to create a new FeedBack
 router.post(
   "/uploadFeedBack",
   [
@@ -22,13 +21,10 @@ router.post(
   }
 );
 
-// Route to get FeedBack
 router.get("/getFeedBack", feedBackController.getFeedBack);
 
-// Route to get a specific feedback by ID
 router.get("/:id", feedBackController.getFeedBackById);
 
-// Route to delete feedback
 router.delete("/:id", feedBackController.deleteFeedBack);
 
 module.exports = router;
