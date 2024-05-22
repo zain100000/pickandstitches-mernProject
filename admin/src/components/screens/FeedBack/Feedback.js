@@ -5,19 +5,20 @@ import { Link, useNavigate } from "react-router-dom";
 import Loader from "../../otherComponents/Loader/Loader";
 
 const Feedback = () => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState("");
+  const [data, setData] = useState([]); // Initialize data as an empty array
+  const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectAll, setSelectAll] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
 
   const getApiData = async () => {
     const url =
-      "https://pickandstitches-deployment-server.onrender.com/api/feedback/getFeedback?";
+      "https://pickandstitches-deployment-server.onrender.com/api/feedback/getFeedback";
 
     try {
+      setLoading(true); // Set loading to true before fetching data
       const response = await axios.get(url);
-      const result = response.data.FeedBack;
+      const result = response.data.FeedBack || []; // Ensure result is an array
       setData(result);
       setLoading(false);
       setSelectAll(false);
@@ -176,55 +177,56 @@ const Feedback = () => {
                       <Loader />
                     ) : (
                       <>
-                        {filterData().map((item) => (
-                          <tr key={item._id}>
-                            <td>
-                              <input
-                                type="checkbox"
-                                className="mt-5"
-                                checked={selectedItems.includes(item._id)}
-                                onChange={() =>
-                                  handleIndividualCheckbox(item._id)
-                                }
-                              />
-                            </td>
-                            <td className="py-5">{item.name}</td>
-                            <td className="py-5">{item.email}</td>
-                            <td className="py-5">{item.mobile}</td>
-                            <td className="py-5">{item.subject}</td>
-                            <td className="py-5">{item.message}</td>
-                            <td className="py-4">
-                              <div
-                                className="icon-container"
-                                style={{
-                                  display: "flex",
-                                  justifyContent: "space-around",
-                                  gap: 20,
-                                  alignItems: "center",
-                                  marginTop: "18px",
-                                }}
-                              >
+                        {data &&
+                          filterData().map((item) => (
+                            <tr key={item._id}>
+                              <td>
+                                <input
+                                  type="checkbox"
+                                  className="mt-5"
+                                  checked={selectedItems.includes(item._id)}
+                                  onChange={() =>
+                                    handleIndividualCheckbox(item._id)
+                                  }
+                                />
+                              </td>
+                              <td className="py-5">{item.name}</td>
+                              <td className="py-5">{item.email}</td>
+                              <td className="py-5">{item.mobile}</td>
+                              <td className="py-5">{item.subject}</td>
+                              <td className="py-5">{item.message}</td>
+                              <td className="py-4">
                                 <div
-                                  className="trash-icon"
+                                  className="icon-container"
                                   style={{
-                                    padding: "2px 12px",
-                                    borderRadius: "50px",
-                                    boxShadow:
-                                      "0px 4px 20px rgba(0, 0, 0, 0.1)",
+                                    display: "flex",
+                                    justifyContent: "space-around",
+                                    gap: 20,
+                                    alignItems: "center",
+                                    marginTop: "18px",
                                   }}
                                 >
-                                  <Link
-                                    onClick={() =>
-                                      handleIndividualDelete(item._id)
-                                    }
+                                  <div
+                                    className="trash-icon"
+                                    style={{
+                                      padding: "2px 12px",
+                                      borderRadius: "50px",
+                                      boxShadow:
+                                        "0px 4px 20px rgba(0, 0, 0, 0.1)",
+                                    }}
                                   >
-                                    <i className="fas fa-trash text-danger pt-2"></i>
-                                  </Link>
+                                    <Link
+                                      onClick={() =>
+                                        handleIndividualDelete(item._id)
+                                      }
+                                    >
+                                      <i className="fas fa-trash text-danger pt-2"></i>
+                                    </Link>
+                                  </div>
                                 </div>
-                              </div>
-                            </td>
-                          </tr>
-                        ))}
+                              </td>
+                            </tr>
+                          ))}
                         {filterData().length === 0 && (
                           <tr>
                             <td colSpan="7">No FeedBacks Yet</td>
