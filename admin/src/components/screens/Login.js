@@ -89,7 +89,7 @@ const Login = () => {
       });
 
       if (response.status === 200) {
-        alert("Signin Successful");
+        alert("Signin Successfully");
         const { token } = response.data;
         localStorage.setItem("token", token);
         handleSuccessNavigate();
@@ -98,7 +98,7 @@ const Login = () => {
       }
     } catch (error) {
       if (error.response && error.response.status === 500) {
-        alert("Invalid Credentials");
+        alert("Admin Not Found! Please Signup First ");
       } else {
         alert("Error During Signing In!");
       }
