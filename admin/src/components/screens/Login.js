@@ -1,34 +1,15 @@
-// Login.js
 import React, { useState } from "react";
 import Logo from "../../assets/logo.png";
 import "./css/Login.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Loader from "../otherComponents/Loader/Loader";
-import SuccessModal from "../otherComponents/modals/SuccessModal";
-import ErrorModal from "../otherComponents/modals/ErrorModal";
 
-const Login = ({ onClose }) => {
+const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
-  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
-  const [errorModalContent, setErrorModalContent] = useState("");
-
-  const toggleSuccessModal = () => {
-    setIsSuccessModalOpen(!isSuccessModalOpen); // Toggle modal visibility
-  };
-
-  const toggleErrorModal = (content = "") => {
-    setErrorModalContent(content);
-    setIsErrorModalOpen(!isErrorModalOpen);
-  };
-
-  const handleCloseErrorModal = () => {
-    setIsErrorModalOpen(false); // Close error modal
-  };
 
   const handleSignup = () => {
     navigate("/signup");
@@ -51,6 +32,7 @@ const Login = ({ onClose }) => {
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
+
   const validateEmail = () => {
     if (!email) {
       return "";
@@ -61,11 +43,13 @@ const Login = ({ onClose }) => {
     }
     return "";
   };
+
   const emailError = validateEmail();
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
+
   const validatePassword = () => {
     if (!password) {
       return "";
@@ -76,17 +60,18 @@ const Login = ({ onClose }) => {
     }
     return "";
   };
+
   const passwordError = validatePassword();
 
   const handleSignin = async (e) => {
     e.preventDefault();
     if (!email) {
-      toggleErrorModal("Email Required");
-      return "";
+      alert("Email Required");
+      return;
     }
     if (!password) {
-      toggleErrorModal("Password Required");
-      return "";
+      alert("Password Required");
+      return;
     }
     setLoading(true);
     try {
@@ -104,18 +89,18 @@ const Login = ({ onClose }) => {
       });
 
       if (response.status === 200) {
-        toggleSuccessModal(); // Signin successful
+        alert("Signin Successful");
         const { token } = response.data;
         localStorage.setItem("token", token);
+        handleSuccessNavigate();
       } else {
-        toggleErrorModal("Error Signing In!");
+        alert("Error Signing In!");
       }
     } catch (error) {
-      // Check if the error response indicates that if invalid credentials
       if (error.response && error.response.status === 500) {
-        toggleErrorModal("Invalid Credentials");
+        alert("Invalid Credentials");
       } else {
-        toggleErrorModal("Error During Signing In!");
+        alert("Error During Signing In!");
       }
     } finally {
       setLoading(false);
@@ -210,22 +195,6 @@ const Login = ({ onClose }) => {
             </form>
           </div>
         </div>
-        {/* Success modal */}
-        <SuccessModal
-          isOpen={isSuccessModalOpen}
-          onClose={handleSuccessNavigate}
-        >
-          <h2>Signin Successful</h2>
-          {/* Remove button from success modal */}
-        </SuccessModal>
-
-        {/* Error modal */}
-        <ErrorModal isOpen={isErrorModalOpen} onClose={handleCloseErrorModal}>
-          <h2>{errorModalContent}</h2>
-          <button onClick={handleCloseErrorModal} className="modal-btn">
-            OK
-          </button>
-        </ErrorModal>
       </div>
     </section>
   );

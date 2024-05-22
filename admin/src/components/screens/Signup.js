@@ -4,30 +4,12 @@ import "./css/Signup.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Loader from "../otherComponents/Loader/Loader";
-import SuccessModal from "../otherComponents/modals/SuccessModal";
-import ErrorModal from "../otherComponents/modals/ErrorModal";
 
-const Signup = ({ onClose }) => {
+const Signup = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
-  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
-  const [errorModalContent, setErrorModalContent] = useState("");
-
-  const toggleSuccessModal = () => {
-    setIsSuccessModalOpen(!isSuccessModalOpen); // Toggle modal visibility
-  };
-
-  const toggleErrorModal = (content = "") => {
-    setErrorModalContent(content);
-    setIsErrorModalOpen(!isErrorModalOpen);
-  };
-
-  const handleCloseErrorModal = () => {
-    setIsErrorModalOpen(false); // Close error modal
-  };
 
   const handleSignin = () => {
     navigate("/");
@@ -50,6 +32,7 @@ const Signup = ({ onClose }) => {
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
+
   const validateEmail = () => {
     if (!email) {
       return "";
@@ -60,11 +43,13 @@ const Signup = ({ onClose }) => {
     }
     return "";
   };
+
   const emailError = validateEmail();
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
+
   const validatePassword = () => {
     if (!password) {
       return "";
@@ -75,17 +60,18 @@ const Signup = ({ onClose }) => {
     }
     return "";
   };
+
   const passwordError = validatePassword();
 
   const handleSignup = async (e) => {
     e.preventDefault();
     if (!email) {
-      toggleErrorModal("Email Required");
-      return "";
+      alert("Email Required");
+      return;
     }
     if (!password) {
-      toggleErrorModal("Password Required");
-      return "";
+      alert("Password Required");
+      return;
     }
     setLoading(true);
     try {
@@ -102,17 +88,17 @@ const Signup = ({ onClose }) => {
         },
       });
 
-      if (response.status === 200) {
-        toggleSuccessModal(); // Signup successful
+      if (response.status === 200 || response.status === 201) {
+        alert("Signup Successfully");
+        handleSuccessNavigate();
       } else {
-        toggleErrorModal("Error Signing Up!");
+        alert("Error Signing Up!");
       }
     } catch (error) {
-      // Check if the error response indicates that if Admin Already Exists
       if (error.response && error.response.status === 500) {
-        toggleErrorModal("Admin Already Exists");
+        alert("Admin Already Exists. Please use a different email.");
       } else {
-        toggleErrorModal("Error During Signing Up!");
+        alert("Error During Signing Up!");
       }
     } finally {
       setLoading(false);
@@ -207,24 +193,6 @@ const Signup = ({ onClose }) => {
             </form>
           </div>
         </div>
-        {/* Success modal */}
-        <SuccessModal
-          isOpen={isSuccessModalOpen}
-          onClose={handleSuccessNavigate}
-        >
-          <h2>Signin Successful</h2>
-          <button onClick={handleSuccessNavigate} className="modal-btn">
-            OK
-          </button>
-        </SuccessModal>
-
-        {/* Error modal */}
-        <ErrorModal isOpen={isErrorModalOpen} onClose={handleCloseErrorModal}>
-          <h2>{errorModalContent}</h2>
-          <button onClick={handleCloseErrorModal} className="modal-btn">
-            OK
-          </button>
-        </ErrorModal>
       </div>
     </section>
   );
