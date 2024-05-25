@@ -42,7 +42,7 @@ const getProduct = async (req, res, next) => {
       return res.status(404).json({ message: "No Products!" });
     }
 
-    res.status(200).json({ products });
+    res.status(200).json({ Product: products });
   } catch (error) {
     console.error("Error fetching Products:", error);
     return next(new HttpError("Failed To Get Products!", 500));
@@ -60,7 +60,7 @@ const getProductById = async (req, res, next) => {
         .json({ message: "Product not found for Provided Id" });
     }
 
-    res.status(200).json({ product });
+    res.status(200).json({ Product: product });
   } catch (error) {
     console.error("Error fetching Product by ID:", error);
     return next(new HttpError("Product Not Found By Provided Id!", 500));

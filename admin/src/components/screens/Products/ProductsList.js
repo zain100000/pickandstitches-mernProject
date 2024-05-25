@@ -6,7 +6,7 @@ import Loader from "../../otherComponents/Loader/Loader";
 
 const ProductsList = () => {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState("");
+  const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectAll, setSelectAll] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -32,6 +32,7 @@ const ProductsList = () => {
   }, []);
 
   const filterData = () => {
+    if (!data) return []; // Ensure data is defined
     return data.filter((item) =>
       item.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
